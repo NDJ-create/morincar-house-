@@ -6,640 +6,149 @@
 <title>MorinCar House — Importateur Automobile | Lomé, Togo</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --noir: #080808;
-    --blanc: #f4efe6;
-    --or: #c8a84b;
-    --or-clair: #e2c46a;
-    --gris: #141414;
-    --gris2: #1e1e1e;
-    --texte-sec: #777;
-    --rouge: #c0392b;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--noir);
-    color: var(--blanc);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 200;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(8,8,8,0.92);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(200,168,75,0.18);
-  }
-
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--or);
-    letter-spacing: 1px;
-  }
-  .logo span { color: var(--blanc); }
-
-  nav ul { list-style: none; display: flex; gap: 2rem; }
-  nav ul a {
-    color: var(--texte-sec);
-    text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  nav ul a:hover { color: var(--or); }
-
-  .nav-wa {
-    background: #25d366;
-    color: #fff !important;
-    padding: 0.55rem 1.2rem;
-    border-radius: 2px;
-    font-weight: 600 !important;
-  }
-  .nav-wa:hover { background: #1ebe5d !important; color: #fff !important; }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 9rem 4rem 5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(200,168,75,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,168,75,0.04) 0%, transparent 60%);
-  }
-
-  .hero-badge {
-    display: inline-block;
-    border: 1px solid var(--or);
-    color: var(--or);
-    font-size: 0.68rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    margin-bottom: 1.8rem;
-    animation: fadeUp 0.7s ease both;
-  }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3.2rem, 6vw, 6rem);
-    font-weight: 900;
-    line-height: 1.05;
-    max-width: 820px;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.7s 0.1s ease both;
-  }
-
-  .hero h1 em { font-style: italic; color: var(--or); }
-
-  .hero-slogan {
-    font-size: 1.1rem;
-    color: var(--texte-sec);
-    max-width: 540px;
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    animation: fadeUp 0.7s 0.2s ease both;
-  }
-
-  .hero-btns {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.3s ease both;
-  }
-
-  .btn-or {
-    background: var(--or);
-    color: var(--noir);
-    padding: 0.85rem 2rem;
-    border: none;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .btn-or:hover { background: var(--or-clair); transform: translateY(-2px); }
-
-  .btn-wa {
-    background: #25d366;
-    color: #fff;
-    padding: 0.85rem 2rem;
-    border: none;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--blanc);
-    padding: 0.85rem 2rem;
-    border: 1px solid rgba(244,239,230,0.25);
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: border-color 0.3s, color 0.3s;
-  }
-  .btn-ghost:hover { border-color: var(--or); color: var(--or); }
-
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    animation: fadeUp 0.7s 0.4s ease both;
-    padding-top: 2.5rem;
-    border-top: 1px solid rgba(200,168,75,0.15);
-  }
-
-  .stat { }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    color: var(--or);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.72rem;
-    color: var(--texte-sec);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-  }
-
-  /* ── DIVIDER ── */
-  .div-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.3), transparent);
-    margin: 0;
-  }
-
-  /* ── SECTION GÉNÉRIQUE ── */
-  .section { padding: 6rem 4rem; }
-
-  .sec-label {
-    font-size: 0.68rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--or);
-    margin-bottom: 0.6rem;
-  }
-
-  .sec-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-  }
-
-  .sec-sub {
-    color: var(--texte-sec);
-    font-size: 0.95rem;
-    line-height: 1.8;
-    max-width: 580px;
-    margin-bottom: 3rem;
-  }
-
-  /* ── MARQUES ── */
-  .marques-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .marque-card {
-    background: var(--gris);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .marque-card:hover {
-    border-color: rgba(200,168,75,0.4);
-    transform: translateY(-4px);
-  }
-
-  .marque-imgs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    height: 260px;
-  }
-
-  .marque-imgs img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .marque-imgs.single img {
-    grid-column: span 2;
-  }
-
-  .marque-body { padding: 1.5rem 1.8rem; }
-
-  .marque-nom {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .marque-badge {
-    background: rgba(200,168,75,0.12);
-    border: 1px solid rgba(200,168,75,0.3);
-    color: var(--or);
-    font-size: 0.62rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-  }
-
-  .marque-annees {
-    color: var(--texte-sec);
-    font-size: 0.82rem;
-    margin-bottom: 1rem;
-  }
-
-  .modeles-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .modele-tag {
-    background: var(--gris2);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--blanc);
-    font-size: 0.72rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 2px;
-    letter-spacing: 0.5px;
-  }
-
-  .modele-tag.special {
-    border-color: rgba(200,168,75,0.3);
-    color: var(--or);
-  }
-
-  /* ── SUR MESURE ── */
-  .sur-mesure {
-    background: var(--gris);
-    border: 1px solid rgba(200,168,75,0.2);
-    border-radius: 4px;
-    padding: 3rem;
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .sur-mesure h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    margin-bottom: 0.6rem;
-  }
-  .sur-mesure p { color: var(--texte-sec); line-height: 1.7; font-size: 0.92rem; }
-
-  .sur-mesure-btns { display: flex; flex-direction: column; gap: 0.8rem; }
-
-  /* ── ÉQUIPE ── */
-  .equipe-section {
-    padding: 6rem 4rem;
-    background: var(--gris);
-  }
-
-  .equipe-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 280px);
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .membre-card {
-    background: var(--noir);
-    border: 1px solid rgba(200,168,75,0.15);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .membre-card:hover { border-color: var(--or); }
-
-  .membre-photo {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-  }
-
-  .membre-info { padding: 1.2rem 1.5rem; }
-  .membre-nom { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.2rem; }
-  .membre-role { color: var(--or); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.8rem; }
-
-  .membre-contacts { display: flex; flex-direction: column; gap: 0.4rem; }
-  .membre-contact-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--texte-sec);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .membre-contact-item:hover { color: var(--or); }
-  .membre-contact-item span:first-child { font-size: 0.9rem; }
-
-  /* ── SERVICES ── */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .service-card {
-    border: 1px solid rgba(200,168,75,0.15);
-    border-radius: 4px;
-    padding: 2rem;
-    transition: border-color 0.3s, background 0.3s;
-  }
-
-  .service-card:hover {
-    border-color: var(--or);
-    background: rgba(200,168,75,0.04);
-  }
-
-  .service-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .service-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 0.6rem;
-  }
-  .service-text { color: var(--texte-sec); font-size: 0.85rem; line-height: 1.7; }
-
-  /* ── CONTACT ── */
-  .contact-section {
-    padding: 6rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .contact-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .contact-section p {
-    color: var(--texte-sec);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-  }
-
-  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.2rem;
-    background: var(--gris);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 4px;
-    text-decoration: none;
-    color: var(--blanc);
-    transition: border-color 0.3s;
-    font-size: 0.88rem;
-  }
-
-  .contact-item:hover { border-color: var(--or); }
-
-  .ci-icon {
-    width: 38px; height: 38px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-
-  .ci-wa { background: rgba(37,211,102,0.15); }
-  .ci-mail { background: rgba(200,168,75,0.15); }
-  .ci-loc { background: rgba(200,168,75,0.1); }
-
-  .ci-label { font-size: 0.7rem; color: var(--texte-sec); letter-spacing: 1px; text-transform: uppercase; }
-  .ci-value { font-size: 0.88rem; margin-top: 0.1rem; }
-
-  /* FORM */
-  .contact-form {
-    background: var(--gris);
-    border: 1px solid rgba(200,168,75,0.15);
-    border-radius: 4px;
-    padding: 2.5rem;
-  }
-
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    color: var(--or);
-  }
-
-  .form-group { margin-bottom: 1rem; }
-
-  .form-group label {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--texte-sec);
-    margin-bottom: 0.4rem;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--blanc);
-    padding: 0.75rem 1rem;
-    border-radius: 2px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus { border-color: var(--or); }
-
-  .form-group select option { background: #1a1a1a; }
-  .form-group textarea { resize: vertical; min-height: 90px; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--gris);
-    border-top: 1px solid rgba(200,168,75,0.12);
-    padding: 2.5rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--or); }
-  .footer-logo span { color: var(--blanc); }
-  .footer-copy { color: var(--texte-sec); font-size: 0.78rem; }
-
-  .footer-links { display: flex; gap: 1.5rem; }
-  .footer-links a { color: var(--texte-sec); text-decoration: none; font-size: 0.78rem; transition: color 0.3s; }
-  .footer-links a:hover { color: var(--or); }
-
-  /* ── WA FLOAT ── */
-  .wa-float {
-    position: fixed;
-    bottom: 2rem; right: 2rem;
-    z-index: 999;
-    background: #25d366;
-    color: #fff;
-    width: 58px; height: 58px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-    animation: pulse 2.5s infinite;
-  }
-
-  .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
-
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
-    50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--noir); }
-  ::-webkit-scrollbar-thumb { background: var(--or); border-radius: 3px; }
+:root{--noir:#080808;--blanc:#f4efe6;--or:#c8a84b;--or-clair:#e2c46a;--gris:#141414;--gris2:#1e1e1e;--texte-sec:#777;--rouge:#c0392b}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--blanc);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(8,8,8,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,168,75,.18)}
+.logo{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:900;color:var(--or);letter-spacing:1px}
+.logo span{color:var(--blanc)}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul a{color:var(--texte-sec);text-decoration:none;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s}
+nav ul a:hover{color:var(--or)}
+.nav-wa{background:#25d366;color:#fff!important;padding:.55rem 1.2rem;border-radius:2px;font-weight:600!important}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:9rem 4rem 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(200,168,75,.07) 0%,transparent 70%)}
+.hero-badge{display:inline-block;border:1px solid var(--or);color:var(--or);font-size:.68rem;letter-spacing:3px;text-transform:uppercase;padding:.4rem 1rem;margin-bottom:1.8rem;animation:fadeUp .7s ease both}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(3.2rem,6vw,6rem);font-weight:900;line-height:1.05;max-width:820px;margin-bottom:1.5rem;animation:fadeUp .7s .1s ease both}
+.hero h1 em{font-style:italic;color:var(--or)}
+.hero-slogan{font-size:1.1rem;color:var(--texte-sec);max-width:540px;line-height:1.8;margin-bottom:2.5rem;animation:fadeUp .7s .2s ease both}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
+.btn-or{background:var(--or);color:var(--noir);padding:.85rem 2rem;border:none;cursor:pointer;font-family:"DM Sans",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:2px;text-decoration:none;transition:background .3s,transform .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-or:hover{background:var(--or-clair);transform:translateY(-2px)}
+.btn-wa{background:#25d366;color:#fff;padding:.85rem 2rem;border:none;cursor:pointer;font-family:"DM Sans",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:2px;text-decoration:none;transition:background .3s,transform .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-wa:hover{background:#1ebe5d;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--blanc);padding:.85rem 2rem;border:1px solid rgba(244,239,230,.25);cursor:pointer;font-family:"DM Sans",sans-serif;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;border-radius:2px;text-decoration:none;transition:border-color .3s,color .3s}
+.btn-ghost:hover{border-color:var(--or);color:var(--or)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;animation:fadeUp .7s .4s ease both;padding-top:2.5rem;border-top:1px solid rgba(200,168,75,.15)}
+.stat-num{font-family:"Playfair Display",serif;font-size:2.2rem;color:var(--or);line-height:1}
+.stat-label{font-size:.72rem;color:var(--texte-sec);letter-spacing:1.5px;text-transform:uppercase;margin-top:.3rem}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,.3),transparent)}
+.section{padding:6rem 4rem}
+.sec-label{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:.6rem}
+.sec-title{font-family:"Playfair Display",serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;margin-bottom:.5rem}
+.sec-sub{color:var(--texte-sec);font-size:.95rem;line-height:1.8;max-width:580px;margin-bottom:3rem}
+.marques-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.marque-card{background:var(--gris);border:1px solid rgba(255,255,255,.05);border-radius:4px;overflow:hidden;transition:border-color .3s,transform .3s}
+.marque-card:hover{border-color:rgba(200,168,75,.4);transform:translateY(-4px)}
+.marque-imgs{display:grid;grid-template-columns:1fr 1fr;gap:2px;height:260px}
+.marque-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+.marque-body{padding:1.5rem 1.8rem}
+.marque-nom{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.8rem}
+.marque-badge{background:rgba(200,168,75,.12);border:1px solid rgba(200,168,75,.3);color:var(--or);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;font-family:"DM Sans",sans-serif;font-weight:500}
+.marque-annees{color:var(--texte-sec);font-size:.82rem;margin-bottom:1rem}
+.modeles-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.modele-tag{background:var(--gris2);border:1px solid rgba(255,255,255,.08);color:var(--blanc);font-size:.72rem;padding:.3rem .7rem;border-radius:2px}
+.modele-tag.special{border-color:rgba(200,168,75,.3);color:var(--or)}
+.sur-mesure{background:var(--gris);border:1px solid rgba(200,168,75,.2);border-radius:4px;padding:3rem;margin-top:2rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+.sur-mesure h3{font-family:"Playfair Display",serif;font-size:1.6rem;margin-bottom:.6rem}
+.sur-mesure p{color:var(--texte-sec);line-height:1.7;font-size:.92rem}
+.sur-mesure-btns{display:flex;flex-direction:column;gap:.8rem}
+.equipe-section{padding:6rem 4rem;background:var(--gris)}
+.equipe-grid{display:grid;grid-template-columns:repeat(2,280px);gap:2rem;margin-top:3rem}
+.membre-card{background:var(--noir);border:1px solid rgba(200,168,75,.15);border-radius:4px;overflow:hidden;transition:border-color .3s}
+.membre-card:hover{border-color:var(--or)}
+.membre-photo{width:100%;height:280px;object-fit:cover;object-position:top;display:block}
+.membre-info{padding:1.2rem 1.5rem}
+.membre-nom{font-family:"Playfair Display",serif;font-size:1.15rem;margin-bottom:.2rem}
+.membre-role{color:var(--or);font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.8rem}
+.membre-contacts{display:flex;flex-direction:column;gap:.4rem}
+.membre-contact-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--texte-sec);text-decoration:none;transition:color .3s}
+.membre-contact-item:hover{color:var(--or)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.service-card{border:1px solid rgba(200,168,75,.15);border-radius:4px;padding:2rem;transition:border-color .3s,background .3s}
+.service-card:hover{border-color:var(--or);background:rgba(200,168,75,.04)}
+.service-icon{font-size:2rem;margin-bottom:1rem}
+.service-title{font-family:"Playfair Display",serif;font-size:1.1rem;margin-bottom:.6rem}
+.service-text{color:var(--texte-sec);font-size:.85rem;line-height:1.7}
+.contact-section{padding:6rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-section h2{font-family:"Playfair Display",serif;font-size:2.5rem;margin-bottom:1rem}
+.contact-section p{color:var(--texte-sec);line-height:1.8;margin-bottom:2rem}
+.contact-items{display:flex;flex-direction:column;gap:1rem}
+.contact-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--gris);border:1px solid rgba(255,255,255,.05);border-radius:4px;text-decoration:none;color:var(--blanc);transition:border-color .3s;font-size:.88rem}
+.contact-item:hover{border-color:var(--or)}
+.ci-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1rem;flex-shrink:0}
+.ci-wa{background:rgba(37,211,102,.15)}
+.ci-mail{background:rgba(200,168,75,.15)}
+.ci-loc{background:rgba(200,168,75,.1)}
+.ci-label{font-size:.7rem;color:var(--texte-sec);letter-spacing:1px;text-transform:uppercase}
+.ci-value{font-size:.88rem;margin-top:.1rem}
+.contact-form{background:var(--gris);border:1px solid rgba(200,168,75,.15);border-radius:4px;padding:2.5rem}
+.form-title{font-family:"Playfair Display",serif;font-size:1.3rem;margin-bottom:1.5rem;color:var(--or)}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--texte-sec);margin-bottom:.4rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--blanc);padding:.75rem 1rem;border-radius:2px;font-family:"DM Sans",sans-serif;font-size:.88rem;outline:none;transition:border-color .3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--or)}
+.form-group select option{background:#1a1a1a}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+footer{background:var(--gris);border-top:1px solid rgba(200,168,75,.12);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:"Playfair Display",serif;font-size:1.3rem;color:var(--or)}
+.footer-logo span{color:var(--blanc)}
+.footer-copy{color:var(--texte-sec);font-size:.78rem}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:var(--texte-sec);text-decoration:none;font-size:.78rem;transition:color .3s}
+.footer-links a:hover{color:var(--or)}
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:999;background:#25d366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s;animation:pulse 2.5s infinite}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 30px rgba(37,211,102,.7)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--noir)}
+::-webkit-scrollbar-thumb{background:var(--or);border-radius:3px}
 </style>
 </head>
 <body>
 
-<!-- WA FLOAT -->
-<a href="https://wa.me/33774407015" target="_blank" class="wa-float" title="WhatsApp">💬</a>
+<a href="https://wa.me/33774407015" target="_blank" class="wa-float">&#x1F4AC;</a>
 
-<!-- NAV -->
 <nav>
   <div class="logo">MorinCar<span> House</span></div>
   <ul>
-    <li><a href="#vehicules">Véhicules</a></li>
+    <li><a href="#vehicules">V&#233;hicules</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#equipe">Équipe</a></li>
+    <li><a href="#equipe">&#201;quipe</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://wa.me/33774407015" target="_blank" class="nav-wa">💬 WhatsApp</a></li>
+    <li><a href="https://wa.me/33774407015" target="_blank" class="nav-wa">&#x1F4AC; WhatsApp</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-badge">✦ Importateur automobile — Lomé, Togo</div>
-  <h1>Votre voiture de <em>rêve</em>,<br>livrée au Togo.</h1>
-  <p class="hero-slogan">De l'Europe à votre garage — BMW, Audi, Mercedes, Peugeot. Des occasions sélectionnées avec exigence, importées avec sérieux.</p>
+  <div class="hero-badge">&#10022; Importateur automobile &#8212; Lom&#233;, Togo</div>
+  <h1>Votre voiture de <em>r&#234;ve</em>,<br>livr&#233;e au Togo.</h1>
+  <p class="hero-slogan">De l&#8217;Europe &#224; votre garage &#8212; BMW, Audi, Mercedes, Peugeot. Des occasions s&#233;lectionn&#233;es avec exigence, import&#233;es avec s&#233;rieux.</p>
   <div class="hero-btns">
-    <a href="#vehicules" class="btn-or">🚗 Nos véhicules</a>
-    <a href="https://wa.me/33774407015" target="_blank" class="btn-wa">💬 Commander sur WhatsApp</a>
+    <a href="#vehicules" class="btn-or">&#x1F697; Nos v&#233;hicules</a>
+    <a href="https://wa.me/33774407015" target="_blank" class="btn-wa">&#x1F4AC; Commander sur WhatsApp</a>
     <a href="#contact" class="btn-ghost">Formulaire de contact</a>
   </div>
   <div class="hero-stats">
     <div class="stat"><div class="stat-num">4</div><div class="stat-label">Grandes marques</div></div>
-    <div class="stat"><div class="stat-num">1990–2024</div><div class="stat-label">Années disponibles</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Occasion certifiée</div></div>
-    <div class="stat"><div class="stat-num">Sur mesure</div><div class="stat-label">Commande personnalisée</div></div>
+    <div class="stat"><div class="stat-num">1990&#8211;2024</div><div class="stat-label">Ann&#233;es disponibles</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Occasion certifi&#233;e</div></div>
+    <div class="stat"><div class="stat-num">Sur mesure</div><div class="stat-label">Commande personnalis&#233;e</div></div>
   </div>
 </section>
 
 <div class="div-line"></div>
 
-<!-- VÉHICULES -->
 <section class="section" id="vehicules">
   <div class="sec-label">Catalogue</div>
   <h2 class="sec-title">Les marques que nous importons</h2>
-  <p class="sec-sub">Tous nos véhicules sont des occasions importées d'Europe. Les modèles ci-dessous sont représentatifs de notre sélection — contactez-nous pour la disponibilité exacte.</p>
-
+  <p class="sec-sub">Tous nos v&#233;hicules sont des occasions import&#233;es d&#8217;Europe. Contactez-nous pour la disponibilit&#233; exacte.</p>
   <div class="marques-grid">
 
-    <!-- BMW -->
     <div class="marque-card">
       <div class="marque-imgs">
         <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/IMG-20260320-WA0000.jpg" alt="BMW" loading="lazy">
@@ -647,24 +156,17 @@
       </div>
       <div class="marque-body">
         <div class="marque-nom">BMW <span class="marque-badge">Occasion</span></div>
-        <div class="marque-annees">📅 Millésimes 1990 – 2024</div>
+        <div class="marque-annees">&#x1F4C5; Mill&#233;simes 1990 &#8211; 2024</div>
         <div class="modeles-list">
-          <span class="modele-tag">Série E46</span>
-          <span class="modele-tag">Série E92</span>
-          <span class="modele-tag special">M3</span>
-          <span class="modele-tag special">M4</span>
-          <span class="modele-tag">Série 6 Coupé</span>
-          <span class="modele-tag">X1</span>
-          <span class="modele-tag">X2</span>
-          <span class="modele-tag">X3</span>
-          <span class="modele-tag">X4</span>
-          <span class="modele-tag">X5</span>
-          <span class="modele-tag">X6</span>
+          <span class="modele-tag">S&#233;rie E46</span><span class="modele-tag">S&#233;rie E92</span>
+          <span class="modele-tag special">M3</span><span class="modele-tag special">M4</span>
+          <span class="modele-tag">S&#233;rie 6 Coup&#233;</span>
+          <span class="modele-tag">X1</span><span class="modele-tag">X2</span><span class="modele-tag">X3</span>
+          <span class="modele-tag">X4</span><span class="modele-tag">X5</span><span class="modele-tag">X6</span>
         </div>
       </div>
     </div>
 
-    <!-- AUDI -->
     <div class="marque-card">
       <div class="marque-imgs">
         <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/IMG-20260320-WA0005.jpg" alt="Audi" loading="lazy">
@@ -672,23 +174,16 @@
       </div>
       <div class="marque-body">
         <div class="marque-nom">Audi <span class="marque-badge">Occasion</span></div>
-        <div class="marque-annees">📅 Millésimes 1990 – 2024</div>
+        <div class="marque-annees">&#x1F4C5; Mill&#233;simes 1990 &#8211; 2024</div>
         <div class="modeles-list">
-          <span class="modele-tag">A3</span>
-          <span class="modele-tag">A4</span>
-          <span class="modele-tag">A5</span>
-          <span class="modele-tag">A6</span>
-          <span class="modele-tag">A7</span>
-          <span class="modele-tag">A8</span>
-          <span class="modele-tag special">S3 / S4</span>
-          <span class="modele-tag special">RS</span>
-          <span class="modele-tag">Q3 – Q7</span>
-          <span class="modele-tag">TT</span>
+          <span class="modele-tag">A3</span><span class="modele-tag">A4</span><span class="modele-tag">A5</span>
+          <span class="modele-tag">A6</span><span class="modele-tag">A7</span><span class="modele-tag">A8</span>
+          <span class="modele-tag special">S3 / S4</span><span class="modele-tag special">RS</span>
+          <span class="modele-tag">Q3 &#8211; Q7</span><span class="modele-tag">TT</span>
         </div>
       </div>
     </div>
 
-    <!-- MERCEDES -->
     <div class="marque-card">
       <div class="marque-imgs">
         <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/IMG-20260320-WA0011.jpg" alt="Mercedes" loading="lazy">
@@ -696,20 +191,15 @@
       </div>
       <div class="marque-body">
         <div class="marque-nom">Mercedes-Benz <span class="marque-badge">Occasion</span></div>
-        <div class="marque-annees">📅 Millésimes 1990 – 2024</div>
+        <div class="marque-annees">&#x1F4C5; Mill&#233;simes 1990 &#8211; 2024</div>
         <div class="modeles-list">
-          <span class="modele-tag">CLK</span>
-          <span class="modele-tag">C200</span>
-          <span class="modele-tag">C300</span>
-          <span class="modele-tag special">AMG</span>
-          <span class="modele-tag">Classe E</span>
-          <span class="modele-tag">GLC</span>
-          <span class="modele-tag">GLE</span>
+          <span class="modele-tag">CLK</span><span class="modele-tag">C200</span><span class="modele-tag">C300</span>
+          <span class="modele-tag special">AMG</span><span class="modele-tag">Classe E</span>
+          <span class="modele-tag">GLC</span><span class="modele-tag">GLE</span>
         </div>
       </div>
     </div>
 
-    <!-- PEUGEOT -->
     <div class="marque-card">
       <div class="marque-imgs">
         <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/IMG-20260320-WA0008.jpg" alt="Peugeot" loading="lazy">
@@ -717,111 +207,71 @@
       </div>
       <div class="marque-body">
         <div class="marque-nom">Peugeot <span class="marque-badge">Occasion</span></div>
-        <div class="marque-annees">📅 Millésimes 1990 – 2024</div>
+        <div class="marque-annees">&#x1F4C5; Mill&#233;simes 1990 &#8211; 2024</div>
         <div class="modeles-list">
-          <span class="modele-tag">207</span>
-          <span class="modele-tag">208</span>
-          <span class="modele-tag">307</span>
-          <span class="modele-tag">308</span>
-          <span class="modele-tag">407</span>
-          <span class="modele-tag">3008</span>
-          <span class="modele-tag">5008</span>
+          <span class="modele-tag">207</span><span class="modele-tag">208</span>
+          <span class="modele-tag">307</span><span class="modele-tag">308</span>
+          <span class="modele-tag">407</span><span class="modele-tag">3008</span><span class="modele-tag">5008</span>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- SUR MESURE -->
   <div class="sur-mesure">
     <div>
-      <h3>Vous cherchez un autre modèle ?</h3>
-      <p>Nous pouvons importer presque n'importe quel véhicule sur commande. Contactez-nous avec vos critères (marque, modèle, année, budget) et nous vous faisons une proposition personnalisée.</p>
+      <h3>Vous cherchez un autre mod&#232;le&#160;?</h3>
+      <p>Nous pouvons importer presque n&#8217;importe quel v&#233;hicule sur commande. Contactez-nous avec vos crit&#232;res.</p>
     </div>
     <div class="sur-mesure-btns">
-      <a href="https://wa.me/33774407015" target="_blank" class="btn-wa">💬 WhatsApp</a>
-      <a href="#" class="btn-or" id="email-btn1">✉️ Email</a>
+      <a href="https://wa.me/33774407015" target="_blank" class="btn-wa">&#x1F4AC; WhatsApp</a>
+      <a href="#" id="email-sur" class="btn-or">&#x2709;&#xFE0F; Email</a>
     </div>
   </div>
 </section>
 
 <div class="div-line"></div>
 
-<!-- SERVICES -->
 <section class="section" id="services">
   <div class="sec-label">Ce que nous faisons</div>
   <h2 class="sec-title">Nos services</h2>
-  <p class="sec-sub">De la recherche à la livraison, nous gérons tout pour vous.</p>
-
+  <p class="sec-sub">De la recherche &#224; la livraison, nous g&#233;rons tout pour vous.</p>
   <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">🌍</div>
-      <div class="service-title">Importation depuis l'Europe</div>
-      <div class="service-text">Nous sourçons vos véhicules directement auprès de vendeurs et enchères européens fiables pour vous garantir le meilleur rapport qualité-prix.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🔍</div>
-      <div class="service-title">Sélection rigoureuse</div>
-      <div class="service-text">Chaque véhicule est inspecté avant achat. Historique, kilométrage, état mécanique — rien n'est laissé au hasard.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🚢</div>
-      <div class="service-title">Transport & dédouanement</div>
-      <div class="service-text">Nous prenons en charge toute la logistique : transport maritime, dédouanement et livraison à Lomé.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🎯</div>
-      <div class="service-title">Commande sur mesure</div>
-      <div class="service-text">Vous avez un modèle précis en tête ? Dites-nous vos critères et nous le trouvons pour vous, au meilleur prix.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">💬</div>
-      <div class="service-title">Suivi personnalisé</div>
-      <div class="service-text">Vous êtes informé à chaque étape — de l'achat jusqu'à la réception de votre véhicule à Lomé.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🤝</div>
-      <div class="service-title">Conseil & accompagnement</div>
-      <div class="service-text">Vous ne savez pas quel modèle choisir ? Notre équipe vous guide selon votre budget et vos besoins.</div>
-    </div>
+    <div class="service-card"><div class="service-icon">&#x1F30D;</div><div class="service-title">Importation depuis l&#8217;Europe</div><div class="service-text">Nous sourçons vos v&#233;hicules directement aupr&#232;s de vendeurs et ench&#232;res europ&#233;ens fiables.</div></div>
+    <div class="service-card"><div class="service-icon">&#x1F50D;</div><div class="service-title">S&#233;lection rigoureuse</div><div class="service-text">Chaque v&#233;hicule est inspect&#233; avant achat. Historique, kilom&#233;trage, &#233;tat m&#233;canique.</div></div>
+    <div class="service-card"><div class="service-icon">&#x1F6A2;</div><div class="service-title">Transport &amp; d&#233;douanement</div><div class="service-text">Nous prenons en charge toute la logistique&#160;: transport maritime, d&#233;douanement et livraison &#224; Lom&#233;.</div></div>
+    <div class="service-card"><div class="service-icon">&#x1F3AF;</div><div class="service-title">Commande sur mesure</div><div class="service-text">Vous avez un mod&#232;le pr&#233;cis en t&#234;te&#160;? Dites-nous vos crit&#232;res et nous le trouvons pour vous.</div></div>
+    <div class="service-card"><div class="service-icon">&#x1F4AC;</div><div class="service-title">Suivi personnalis&#233;</div><div class="service-text">Vous &#234;tes inform&#233; &#224; chaque &#233;tape &#8212; de l&#8217;achat jusqu&#8217;&#224; la r&#233;ception de votre v&#233;hicule.</div></div>
+    <div class="service-card"><div class="service-icon">&#x1F91D;</div><div class="service-title">Conseil &amp; accompagnement</div><div class="service-text">Notre &#233;quipe vous guide selon votre budget et vos besoins.</div></div>
   </div>
 </section>
 
 <div class="div-line"></div>
 
-<!-- ÉQUIPE -->
 <section class="equipe-section" id="equipe">
-  <div class="sec-label">L'équipe</div>
+  <div class="sec-label">L&#8217;&#233;quipe</div>
   <h2 class="sec-title">Vos interlocuteurs</h2>
-  <p class="sec-sub">Des professionnels disponibles et réactifs pour vous accompagner dans votre projet automobile.</p>
-
+  <p class="sec-sub">Des professionnels disponibles et r&#233;actifs pour vous accompagner.</p>
   <div class="equipe-grid">
     <div class="membre-card">
-      <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/IMG-20260320-WA0012.jpg" alt="Équipe MorinCar" class="membre-photo">
+      <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/IMG-20260320-WA0012.jpg" alt="Contact principal" class="membre-photo">
       <div class="membre-info">
         <div class="membre-nom">Contact principal</div>
         <div class="membre-role">Responsable importation</div>
         <div class="membre-contacts">
-          <a href="https://wa.me/33774407015" target="_blank" class="membre-contact-item">
-            <span>💬</span><span>+33 7 74 40 70 15</span>
-          </a>
-          <a href="#" class="membre-contact-item" id="email-m1"><span>✉️</span><span>danieljplegal&#64;gmail.com</span></a>
-          </a>
+          <a href="https://wa.me/33774407015" target="_blank" class="membre-contact-item"><span>&#x1F4AC;</span><span>+33 7 74 40 70 15</span></a>
+          <a href="#" id="email-m1" class="membre-contact-item"><span>&#x2709;&#xFE0F;</span><span id="em1-text">email</span></a>
         </div>
       </div>
     </div>
-
     <div class="membre-card">
-      <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/Screenshot_20250701_094154_Instagram.jpg" alt="Équipe MorinCar" class="membre-photo">
+      <img src="https://raw.githubusercontent.com/NDJ-create/morincar-house-/main/Screenshot_20250701_094154_Instagram.jpg" alt="Contact secondaire" class="membre-photo">
       <div class="membre-info">
         <div class="membre-nom">Contact secondaire</div>
-        <div class="membre-role">Commercial & suivi</div>
+        <div class="membre-role">Commercial &amp; suivi</div>
         <div class="membre-contacts">
-          <a href="https://wa.me/33631170711" target="_blank" class="membre-contact-item">
-            <span>💬</span><span>+33 6 31 17 07 11</span>
-          </a>
-          <a href="#" class="membre-contact-item" id="email-m2"><span>✉️</span><span>moring275&#64;gmail.com</span></a>
-          </a>
+          <a href="https://wa.me/33631170711" target="_blank" class="membre-contact-item"><span>&#x1F4AC;</span><span>+33 6 31 17 07 11</span></a>
+          <a href="#" id="email-m2" class="membre-contact-item"><span>&#x2709;&#xFE0F;</span><span id="em2-text">email</span></a>
         </div>
       </div>
     </div>
@@ -830,56 +280,84 @@
 
 <div class="div-line"></div>
 
-<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div>
     <div class="sec-label">Contactez-nous</div>
     <h2>Parlons de votre <em style="font-style:italic;color:var(--or)">prochaine voiture</em></h2>
-    <p>Disponibles 7j/7 par WhatsApp ou email. Réponse garantie sous 24h.</p>
-
+    <p>Disponibles 7j/7 par WhatsApp ou email. R&#233;ponse garantie sous 24h.</p>
     <div class="contact-items">
-      <a href="https://wa.me/33774407015" target="_blank" class="contact-item">
-        <div class="ci-icon ci-wa">💬</div>
-        <div><div class="ci-label">WhatsApp principal</div><div class="ci-value">+33 7 74 40 70 15</div></div>
-      </a>
-      <a href="https://wa.me/33631170711" target="_blank" class="contact-item">
-        <div class="ci-icon ci-wa">💬</div>
-        <div><div class="ci-label">WhatsApp secondaire</div><div class="ci-value">+33 6 31 17 07 11</div></div>
-      </a>
-      <div class="contact-item">
-        <div class="ci-icon ci-mail">✉️</div>
-        <div><div class="ci-label">Email principal</div><div class="ci-value" id="email-c1">danieljplegal&#64;gmail.com</div></div>
-      </a>
-      <div class="contact-item">
-        <div class="ci-icon ci-mail">✉️</div>
-        <div><div class="ci-label">Email secondaire</div><div class="ci-value" id="email-c2">moring275&#64;gmail.com</div></div>
-      </a>
-      <div class="contact-item">
-        <div class="ci-icon ci-loc">📍</div>
-        <div><div class="ci-label">Localisation</div><div class="ci-value">Lomé, Togo</div></div>
-      </div>
+      <a href="https://wa.me/33774407015" target="_blank" class="contact-item"><div class="ci-icon ci-wa">&#x1F4AC;</div><div><div class="ci-label">WhatsApp principal</div><div class="ci-value">+33 7 74 40 70 15</div></div></a>
+      <a href="https://wa.me/33631170711" target="_blank" class="contact-item"><div class="ci-icon ci-wa">&#x1F4AC;</div><div><div class="ci-label">WhatsApp secondaire</div><div class="ci-value">+33 6 31 17 07 11</div></div></a>
+      <div class="contact-item" id="email-c1-wrap"><div class="ci-icon ci-mail">&#x2709;&#xFE0F;</div><div><div class="ci-label">Email principal</div><div class="ci-value" id="ec1">chargement...</div></div></div>
+      <div class="contact-item" id="email-c2-wrap"><div class="ci-icon ci-mail">&#x2709;&#xFE0F;</div><div><div class="ci-label">Email secondaire</div><div class="ci-value" id="ec2">chargement...</div></div></div>
+      <div class="contact-item"><div class="ci-icon ci-loc">&#x1F4CD;</div><div><div class="ci-label">Localisation</div><div class="ci-value">Lom&#233;, Togo</div></div></div>
     </div>
   </div>
-
   <div class="contact-form">
     <div class="form-title">Faire une demande</div>
     <div class="form-row">
-      <div class="form-group"><label>Prénom</label><input type="text" placeholder="Jean"></div>
+      <div class="form-group"><label>Pr&#233;nom</label><input type="text" placeholder="Jean"></div>
       <div class="form-group"><label>Nom</label><input type="text" placeholder="Dupont"></div>
     </div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
-    <div class="form-group"><label>WhatsApp / Téléphone</label><input type="tel" placeholder="+228 ..."></div>
+    <div class="form-group"><label>WhatsApp / T&#233;l&#233;phone</label><input type="tel" placeholder="+228 ..."></div>
     <div class="form-group">
-      <label>Marque souhaitée</label>
+      <label>Marque souhait&#233;e</label>
       <select>
         <option value="">Choisir...</option>
-        <option>BMW</option>
-        <option>Audi</option>
-        <option>Mercedes-Benz</option>
-        <option>Peugeot</option>
-        <option>Autre (préciser dans le message)</option>
+        <option>BMW</option><option>Audi</option>
+        <option>Mercedes-Benz</option><option>Peugeot</option>
+        <option>Autre (pr&#233;ciser dans le message)</option>
       </select>
     </div>
-    <div class="form-group"><label>Modèle & année souhaités</label><input type="text" placeholder="Ex: BMW X5 2020"></div>
-    <div class="form-group"><label>Budget approximatif</label><input type="text" placeholder="Ex: 15 000 €"></div>
-    <div class="form-group"><label>Message</label><textarea placeholder="Dé
+    <div class="form-group"><label>Mod&#232;le &amp; ann&#233;e souhait&#233;s</label><input type="text" placeholder="Ex: BMW X5 2020"></div>
+    <div class="form-group"><label>Budget approximatif</label><input type="text" placeholder="Ex: 15 000 &#x20AC;"></div>
+    <div class="form-group"><label>Message</label><textarea placeholder="D&#233;crivez votre besoin, vos crit&#232;res..."></textarea></div>
+    <a href="#" id="email-form-btn" class="btn-or" style="width:100%;justify-content:center;padding:1rem;display:flex">Envoyer ma demande &#x2192;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MorinCar<span> House</span></div>
+  <div class="footer-links">
+    <a href="#vehicules">V&#233;hicules</a>
+    <a href="#services">Services</a>
+    <a href="#equipe">&#201;quipe</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">&#169; 2026 MorinCar House &#8212; Lom&#233;, Togo</div>
+</footer>
+
+<script>
+(function(){
+  var u = "danieljplegal";
+  var v = "moring275";
+  var d = "gmail.com";
+  var e1 = u + "@" + d;
+  var e2 = v + "@" + d;
+
+  var m1 = document.getElementById("email-m1");
+  var t1 = document.getElementById("em1-text");
+  if(m1){ m1.href = "mailto:" + e1; }
+  if(t1){ t1.textContent = e1; }
+
+  var m2 = document.getElementById("email-m2");
+  var t2 = document.getElementById("em2-text");
+  if(m2){ m2.href = "mailto:" + e2; }
+  if(t2){ t2.textContent = e2; }
+
+  var ec1 = document.getElementById("ec1");
+  if(ec1){ ec1.innerHTML = "<a href='mailto:" + e1 + "' style='color:inherit;text-decoration:none'>" + e1 + "</a>"; }
+
+  var ec2 = document.getElementById("ec2");
+  if(ec2){ ec2.innerHTML = "<a href='mailto:" + e2 + "' style='color:inherit;text-decoration:none'>" + e2 + "</a>"; }
+
+  var sur = document.getElementById("email-sur");
+  if(sur){ sur.href = "mailto:" + e1; }
+
+  var fb = document.getElementById("email-form-btn");
+  if(fb){ fb.href = "mailto:" + e1; }
+})();
+</script>
+</body>
+                                                                                 </html>
